@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 /* eslint-disable import/no-anonymous-default-export */
-import { useState } from "react";
+import useLocalStorageState from "./useLocalStorageState";
 import { v4 as uuidv4 } from 'uuid';
 
 export default (initialTodos) => {
-  const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useLocalStorageState('todos', initialTodos);
 
   return {
     todos,
