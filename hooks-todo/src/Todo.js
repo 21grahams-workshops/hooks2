@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import useToggleState from "./hooks/useToggleState";
 import EditTodoForm from "./EditTodoForm";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import ListItemText from "@material-ui/core/ListItem";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -11,9 +11,9 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { DispatchContext } from "./context/todos.context";
 
 function Todo({ id, task, completed }) {
-  const { dispatch } = useContext(DispatchContext);
+  const dispatch = useContext(DispatchContext);
   const [isEditing, toggle] = useToggleState(false);
-
+  console.log('TODO RE-RENDER: ', task);
   return (
     <ListItem style={{ height: "64px" }}>
       {isEditing ? (
@@ -32,12 +32,12 @@ function Todo({ id, task, completed }) {
           </ListItemText>
           <ListItemSecondaryAction>
             <IconButton
-              aria-label="Delete"
+              aria-label='Delete'
               onClick={() => dispatch({ type: "REMOVE", id: id })}
             >
               <DeleteIcon />
             </IconButton>
-            <IconButton aria-label="Edit" onClick={toggle}>
+            <IconButton aria-label='Edit' onClick={toggle}>
               <EditIcon />
             </IconButton>
           </ListItemSecondaryAction>
@@ -47,4 +47,4 @@ function Todo({ id, task, completed }) {
   );
 }
 
-export default Todo;
+export default memo(Todo);

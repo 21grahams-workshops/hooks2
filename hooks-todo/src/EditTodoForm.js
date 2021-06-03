@@ -4,12 +4,11 @@ import TextField from "@material-ui/core/TextField";
 import { DispatchContext } from "./context/todos.context";
 
 function EditTodoForm({ id, task, toggleEditForm }) {
-  const { dispatch } = useContext(DispatchContext);
+  const dispatch = useContext(DispatchContext);
   const [value, handleChange, reset] = useInputState(task);
-
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={e => {
         e.preventDefault();
         dispatch({ type: "EDIT", id: id, newTask: value });
         reset();
@@ -18,7 +17,7 @@ function EditTodoForm({ id, task, toggleEditForm }) {
       style={{ marginLeft: "1rem", width: "50%" }}
     >
       <TextField
-        margin="normal"
+        margin='normal'
         value={value}
         onChange={handleChange}
         fullWidth
@@ -27,5 +26,4 @@ function EditTodoForm({ id, task, toggleEditForm }) {
     </form>
   );
 }
-
 export default EditTodoForm;
